@@ -2,6 +2,80 @@ import pandas as pd
 from faker import Faker
 import matplotlib.pyplot as plt
 import re
+from orbea_package.eda import (
+    importar_dataset,
+    mostrar_5_primeros,
+    contar_ciclistas,
+    obtener_columnas,
+    name_surname,
+    remove_non_participants,
+    get_cyclist_by_dorsal,
+)
+from orbea_package.grouping import minutes_002040, group_and_plot_histogram
+from orbea_package.clubs import clean_club, process_clubs, analyze_ucsc
+
+
+def main():
+    filepath = "data/dataset.csv"
+    df = None
+
+    while True:
+        print("\nSeleccione una opción:")
+        print("1. Importar y mostrar dataset")
+        print("2. Anonimizar nombres")
+        print("3. Eliminar ciclistas no participantes")
+        print("4. Recuperar datos del ciclista con dorsal=1000")
+        print("5. Agrupar tiempos y generar histograma")
+        print("6. Limpiar nombres de clubes y analizar")
+        print("7. Analizar UCSC")
+        print("0. Salir")
+
+        opcion = input("Introduce el número de la opción: ")
+
+        if opcion == "1":
+            print("Cargando datos de Orbea Monegros 2024...")
+            df = importar_dataset(filepath)
+            print("\nPrimeros 5 valores del dataset:")
+            print(mostrar_5_primeros(df))
+        elif opcion == "2" and df is not None:
+            print("Anonimizando nombres de los ciclistas...")
+            df = name_surname(df)
+            print("Primeros 5 valores después de anonimizar:")
+            print(mostrar_5_primeros(df))
+        elif opcion == "3" and df is not None:
+            print("Eliminando ciclistas no participantes...")
+            df = remove_non_participants(df)
+            print(f"Ciclistas restantes: {contar_ciclistas(df)}")
+        elif opcion == "4" and df is not None:
+            print("Recuperando datos del ciclista con dorsal=1000...")
+            cyclist = get_cyclist_by_dorsal(df, 1000)
+            print(cyclist)
+        elif opcion == "5" and df is not None:
+            print("Agrupando tiempos y generando histograma...")
+            grouped = group_and_plot_histogram(df)
+            print(grouped)
+        elif opcion == "6" and df is not None:
+            print("Limpiando nombres de clubes...")
+            grouped_clubs = process_clubs(df)
+            print("15 primeros valores de los clubes limpios:")
+            print(grouped_clubs.head(15))
+        elif opcion == "7" and df is not None:
+            print("Analizando UCSC...")
+            ucsc_cyclists, best_cyclist, best_position, percentage = analyze_ucsc(df)
+            print("Ciclistas de UCSC:")
+            print(ucsc_cyclists)
+            print("Mejor ciclista de UCSC:")
+            print(best_cyclist)
+            print(f"Posición: {best_position}, Porcentaje: {percentage:.2f}%")
+        elif opcion == "0":
+            print("Saliendo del programa.")
+            break
+        else:
+            print("Por favor, selecciona una opción válida o asegúrate de haber importado el dataset.")
+
+
+if __name__ == "__main__":
+    main()
 
 
 def importar_dataset(filepath):
