@@ -51,3 +51,31 @@ def analyze_ucsc(df):
     best_position = df['time'].sort_values().reset_index(drop=True).tolist().index(best_time) + 1
     percentage = (best_position / total_cyclists) * 100
     return ucsc_cyclists, best_cyclist, best_position, percentage
+
+
+if __name__ == "__main__":
+    filepath = "data/dataset.csv"
+    # Cargar el dataset
+    print("Cargando dataset desde:", filepath)
+    try:
+        df = pd.read_csv(filepath, delimiter=';')
+        print("Dataset cargado correctamente.\n")
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo en la ruta {filepath}.")
+        exit()
+
+    # Procesar nombres de clubes
+    print("Procesando nombres de clubes...")
+    grouped_clubs = process_clubs(df)
+    print("Clubes agrupados y limpios:")
+    print(grouped_clubs)
+
+    # Analizar UCSC
+    print("\nAnalizando datos del club UCSC...")
+    ucsc_cyclists, best_cyclist, best_position, percentage = analyze_ucsc(df)
+    print("Ciclistas de UCSC:")
+    print(ucsc_cyclists)
+    print("\nMejor ciclista de UCSC:")
+    print(best_cyclist)
+    print(f"\nPosición del mejor ciclista: {best_position}")
+    print(f"Porcentaje sobre el total: {percentage:.2f}%")

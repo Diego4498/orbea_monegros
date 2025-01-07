@@ -41,3 +41,30 @@ def group_and_plot_histogram(df):
     plt.close()
 
     return grouped
+
+
+if __name__ == "__main__":
+    # Ruta al dataset
+    filepath = "data/dataset.csv"
+
+    # Cargar el dataset
+    print("Cargando dataset desde:", filepath)
+    try:
+        df = pd.read_csv(filepath, delimiter=';')
+        print("Dataset cargado correctamente.\n")
+    except FileNotFoundError:
+        print(f"Error: No se encontró el archivo en la ruta {filepath}.")
+        exit()
+
+    # Agrupar tiempos en franjas de 20 minutos
+    print("Agrupando tiempos en franjas de 20 minutos...")
+    df['time_grouped'] = df['time'].apply(minutes_002040)
+    print("Primeros 15 registros con tiempos agrupados:")
+    print(df[['time', 'time_grouped']].head(15))
+
+    # Generar y guardar el histograma
+    print("\nGenerando histograma de tiempos agrupados...")
+    grouped = group_and_plot_histogram(df)
+    print("Histograma guardado en 'img/histograma.png'.")
+    print("\nDatos agrupados:")
+    print(grouped)
