@@ -15,87 +15,6 @@ from orbea_package.grouping import minutes_002040, group_and_plot_histogram
 from orbea_package.clubs import clean_club, process_clubs, analyze_ucsc
 
 
-def main():
-    filepath = "data/dataset.csv"
-    df = None
-
-    while True:
-        print("\nSeleccione una opción:")
-        print("1. Importar dataset")
-        print("2. Mostrar los 5 primeros registros")
-        print("3. Contar ciclistas participantes")
-        print("4. Mostrar columnas del dataset")
-        print("5. Anonimizar nombres de los ciclistas")
-        print("6. Eliminar ciclistas no participantes")
-        print("7. Recuperar datos del ciclista con dorsal=1000")
-        print("8. Agrupar tiempos en franjas de 20 minutos y generar histograma")
-        print("9. Limpiar nombres de clubes")
-        print("10. Analizar datos del club UCSC")
-        print("0. Salir")
-
-        opcion = input("Introduce el número de la opción: ")
-
-        if opcion == "1":
-            print("Cargando datos de Orbea Monegros 2024...")
-            df = importar_dataset(filepath)
-            print("Dataset cargado correctamente.")
-
-        elif opcion == "2" and df is not None:
-            print("Mostrando los 5 primeros registros:")
-            print(mostrar_5_primeros(df))
-
-        elif opcion == "3" and df is not None:
-            print(f"Número de ciclistas participantes: {contar_ciclistas(df)}")
-
-        elif opcion == "4" and df is not None:
-            print("Columnas del dataset:")
-            print(obtener_columnas(df))
-
-        elif opcion == "5" and df is not None:
-            print("Anonimizando nombres de los ciclistas...")
-            df = name_surname(df)
-            print("Primeros 5 valores después de anonimizar:")
-            print(mostrar_5_primeros(df))
-
-        elif opcion == "6" and df is not None:
-            print("Eliminando ciclistas no participantes...")
-            df = remove_non_participants(df)
-            print(f"Ciclistas restantes después de la limpieza: {contar_ciclistas(df)}")
-
-        elif opcion == "7" and df is not None:
-            print("Recuperando datos del ciclista con dorsal=1000...")
-            cyclist = get_cyclist_by_dorsal(df, 1000)
-            print(cyclist)
-
-        elif opcion == "8" and df is not None:
-            print("Agrupando tiempos en franjas de 20 minutos y generando histograma...")
-            grouped = group_and_plot_histogram(df)
-            print(grouped)
-
-        elif opcion == "9" and df is not None:
-            print("Limpiando nombres de clubes...")
-            grouped_clubs = process_clubs(df)
-            print("15 primeros valores de los clubes limpios:")
-            print(grouped_clubs.head(15))
-
-        elif opcion == "10" and df is not None:
-            print("Analizando datos del club UCSC...")
-            ucsc_cyclists, best_cyclist, best_position, percentage = analyze_ucsc(df)
-            print("Ciclistas de UCSC:")
-            print(ucsc_cyclists)
-            print("Mejor ciclista de UCSC:")
-            print(best_cyclist)
-            print(f"Posición: {best_position}, Porcentaje: {percentage:.2f}%")
-
-        elif opcion == "0":
-            print("Saliendo del programa.")
-            break
-
-        else:
-            print("Por favor, selecciona una opción válida o asegúrate de haber importado el dataset.")
-
-
-
 def importar_dataset(filepath):
     return pd.read_csv(filepath, delimiter=';')
 
@@ -182,45 +101,84 @@ def analyze_ucsc(df):
 
 def main():
     filepath = "data/dataset.csv"
-    print("Cargando datos de Orbea Monegros 2024...")
-    df = importar_dataset(filepath)
+    df = None
 
-    print("\n1. Mostrando los 5 primeros valores del dataset:")
-    print(mostrar_5_primeros(df))
+    while True:
+        print("\nSeleccione una opción:")
+        print("1. Importar dataset")
+        print("2. Mostrar los 5 primeros registros")
+        print("3. Contar ciclistas participantes")
+        print("4. Mostrar columnas del dataset")
+        print("5. Anonimizar nombres de los ciclistas")
+        print("6. Eliminar ciclistas no participantes")
+        print("7. Recuperar datos del ciclista con dorsal=1000")
+        print("8. Agrupar tiempos en franjas de 20 minutos y generar histograma")
+        print("9. Limpiar nombres de clubes")
+        print("10. Analizar datos del club UCSC")
+        print("0. Salir")
 
-    print("\n2. Anonimizando los nombres de los ciclistas...")
-    df = name_surname(df)
-    print("5 primeros valores después de anonimizar:")
-    print(mostrar_5_primeros(df))
+        opcion = input("Introduce el número de la opción: ")
 
-    print("\n3. Eliminando ciclistas que no participaron (00:00:00)...")
-    df = remove_non_participants(df)
-    print(f"Ciclistas restantes: {contar_ciclistas(df)}")
-    print("5 primeros valores después de limpiar:")
-    print(mostrar_5_primeros(df))
+        if opcion == "1":
+            print("Cargando datos de Orbea Monegros 2024...")
+            df = importar_dataset(filepath)
+            print("Dataset cargado correctamente.")
 
-    print("\n4. Recuperando datos del ciclista con dorsal=1000...")
-    cyclist = get_cyclist_by_dorsal(df, 1000)
-    print(cyclist)
+        elif opcion == "2" and df is not None:
+            print("Mostrando los 5 primeros registros:")
+            print(mostrar_5_primeros(df))
 
-    print("\n5. Agrupando tiempos en franjas de 20 minutos y generando histograma...")
-    grouped = group_and_plot_histogram(df)
-    print(grouped)
+        elif opcion == "3" and df is not None:
+            print(f"Número de ciclistas participantes: {contar_ciclistas(df)}")
 
-    print("\n6. Limpiando nombres de los clubs...")
-    grouped_clubs = process_clubs(df)
-    print("15 primeros valores de los clubs limpios:")
-    print(grouped_clubs.head(15))
+        elif opcion == "4" and df is not None:
+            print("Columnas del dataset:")
+            print(obtener_columnas(df))
 
-    print("\n7. Analizando UCSC...")
-    ucsc_cyclists, best_cyclist, best_position, percentage = analyze_ucsc(df)
-    print("Ciclistas de UCSC:")
-    print(ucsc_cyclists)
-    print("Mejor ciclista de UCSC:")
-    print(best_cyclist)
-    print(f"Posición: {best_position}, Porcentaje: {percentage:.2f}%")
+        elif opcion == "5" and df is not None:
+            print("Anonimizando nombres de los ciclistas...")
+            df = name_surname(df)
+            print("Primeros 5 valores después de anonimizar:")
+            print(mostrar_5_primeros(df))
+
+        elif opcion == "6" and df is not None:
+            print("Eliminando ciclistas no participantes...")
+            df = remove_non_participants(df)
+            print(f"Ciclistas restantes después de la limpieza: {contar_ciclistas(df)}")
+
+        elif opcion == "7" and df is not None:
+            print("Recuperando datos del ciclista con dorsal=1000...")
+            cyclist = get_cyclist_by_dorsal(df, 1000)
+            print(cyclist)
+
+        elif opcion == "8" and df is not None:
+            print("Agrupando tiempos en franjas de 20 minutos y generando histograma...")
+            grouped = group_and_plot_histogram(df)
+            print(grouped)
+
+        elif opcion == "9" and df is not None:
+            print("Limpiando nombres de clubes...")
+            grouped_clubs = process_clubs(df)
+            print("15 primeros valores de los clubes limpios:")
+            print(grouped_clubs.head(15))
+
+        elif opcion == "10" and df is not None:
+            print("Analizando datos del club UCSC...")
+            ucsc_cyclists, best_cyclist, best_position, percentage = analyze_ucsc(df)
+            print("Ciclistas de UCSC:")
+            print(ucsc_cyclists)
+            print("Mejor ciclista de UCSC:")
+            print(best_cyclist)
+            print(f"Posición: {best_position}, Porcentaje: {percentage:.2f}%")
+
+        elif opcion == "0":
+            print("Saliendo del programa.")
+            break
+
+        else:
+            print(opcion)
+            print("Por favor, selecciona una opción válida o asegúrate de haber importado el dataset.")
 
 
 if __name__ == "__main__":
     main()
-
