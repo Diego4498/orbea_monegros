@@ -89,7 +89,7 @@ def analyze_ucsc(df):
 
 
 def main():
-    filepath = "/content/drive/My Drive/orbea_monegros/data/dataset.csv"
+    filepath = "data/dataset.csv"
     print("Cargando datos de Orbea Monegros 2024...")
     df = importar_dataset(filepath)
 
