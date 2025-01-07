@@ -19,7 +19,7 @@ Este proyecto es un paquete de Python para analizar el evento ciclista Orbea Mon
 ### Pasos
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tuusuario/orbea_monegros.git
+   git clone https://github.com/Diego4498/orbea_monegros.git
    cd orbea_monegros
    ```
 2. Instala las dependencias necesarias:
