@@ -107,7 +107,8 @@ pytest/test_clubs.py ....                                             [100%]
 
    ```
 ## Licencia
-Este proyecto está licenciado bajo la Licencia MIT.
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
+
 
 ### Resumen de la Licencia MIT:
 - Eres libre de usar, copiar, modificar y distribuir este proyecto.
