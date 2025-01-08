@@ -49,25 +49,63 @@ orbea_monegros/
 │   ├── eda.py               # Funciones para EDA y limpieza de datos
 │   ├── grouping.py          # Funciones para agrupar tiempos y generar histogramas
 │   ├── clubs.py             # Funciones para limpiar y analizar clubes
-│   └── tests/               # Pruebas unitarias para cada módulo
-│       ├── __init__.py      # Inicializa las pruebas
-│       ├── test_eda.py      # Pruebas para `eda.py`
-│       ├── test_grouping.py # Pruebas para `grouping.py`
-│       └── test_clubs.py    # Pruebas para `clubs.py`
+├── pytest/                  # Directorio para pruebas unitarias
+│   ├── __init__.py          # Inicializa las pruebas
+│   ├── test_eda.py          # Pruebas para `eda.py`
+│   ├── test_grouping.py     # Pruebas para `grouping.py`
+│   ├── test_clubs.py        # Pruebas para `clubs.py`
+├── data/                    # Datos utilizados en el proyecto
+│   ├── dataset.csv          # Dataset principal
+├── img/                     # Imágenes generadas durante la ejecución
+│   ├── histograma.png       # Histograma de tiempos agrupados
 ├── main.py                  # Script principal para ejecutar el proyecto
 ├── README.md                # Documentación del proyecto (este archivo)
 ├── LICENSE                  # Licencia del proyecto
 ├── requirements.txt         # Lista de dependencias
 └── setup.py                 # Opcional: script de instalación
+
 ```
 
 ## Pruebas
+### Como ejecutar las pruebas
+Para ejecutar las pruebas unitarias, utiliza el siguiente comando desde el directorio raíz del proyecto:
 
-Ejecuta las pruebas unitarias usando `pytest`:
-```bash
-pytest orbea_package/tests/
-```
+ ```bash
+   python -m pytest pytest/
+   ```
 
+Si pytest está configurado como un comando global, también puedes usar:
+ ```bash
+   pytest pytest/
+   ```
+
+### Cobertura de pruebas
+Las pruebas cubren los módulos principales del proyecto:
+
+EDA (eda.py):
+   Importación y exploración del dataset.
+   Contar ciclistas y limpiar datos.
+   Anonimización de nombres.
+Agrupamiento (grouping.py):
+   Agrupamiento de tiempos en franjas de 20 minutos.
+   Generación de histogramas.
+Clubes (clubs.py):
+   Limpieza y análisis de nombres de clubes.
+   Análisis detallado del club UCSC.
+
+### Salida esperada
+Cuando las pruebas pasan correctamente, deberías ver un resultado similar a este:
+ ```bash
+   ============================= test session starts =============================
+collected 10 items
+
+pytest/test_eda.py ......                                             [100%]
+pytest/test_grouping.py ..                                            [100%]
+pytest/test_clubs.py ....                                             [100%]
+
+============================== 10 passed in 0.12s ==============================
+
+   ```
 ## Licencia
 Este proyecto está licenciado bajo la Licencia MIT.
 
