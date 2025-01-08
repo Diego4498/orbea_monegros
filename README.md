@@ -69,7 +69,7 @@ pytest orbea_package/tests/
 ```
 
 ## Licencia
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT.
 
 ### Resumen de la Licencia MIT:
 - Eres libre de usar, copiar, modificar y distribuir este proyecto.
