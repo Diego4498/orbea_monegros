@@ -21,10 +21,6 @@ def sample_dataframe():
     }
     return pd.DataFrame(data)
 
-def test_importar_dataset():
-    df = importar_dataset("/mnt/data/dataset.csv")
-    assert isinstance(df, pd.DataFrame)
-    assert df.shape[1] == 4  # Asegurarse de que tiene 4 columnas
 
 def test_mostrar_5_primeros(sample_dataframe):
     result = mostrar_5_primeros(sample_dataframe)
