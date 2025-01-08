@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: orbea-package
+Version: 0.1
+Summary: Paquete para análisis de datos de la Orbea Monegros
+Home-page: https://github.com/Diego4498/orbea_monegros
+Author: Tu Nombre
+Author-email: dvazquezz@uoc.edu
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Requires-Dist: pandas
+Requires-Dist: matplotlib
+Requires-Dist: faker
